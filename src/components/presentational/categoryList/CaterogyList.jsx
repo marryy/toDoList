@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import Category from '../category/Category.jsx';
 
 class CategoryList extends React.Component {
-
 	render() {
 		const {categories, level} = this.props;
 

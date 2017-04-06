@@ -1,6 +1,5 @@
 import React from 'react';
 import CategoryList from '../categoryList/CaterogyList.jsx';
-//
 
 class Category extends React.Component {
 

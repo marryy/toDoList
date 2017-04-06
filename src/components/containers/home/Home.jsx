@@ -2,29 +2,28 @@ import React from 'react';
 import { Link } from 'react-router';
 import CategoryList from '../../presentational/categoryList/CaterogyList.jsx';
 import TasksList from  '../../presentational/tasksList/TasksList.jsx';
+import Filters from '../../presentational/filters/Filters.jsx'
 
 const categories = [
     {
         id: 1,
-        level: 1,
         title: 'Work',
         categories: [],
         tasks: [
             {
                 id: 1,
-                checked: false,
+                done: true,
                 title: 'Finish react homework first!'
             },
             {
                 id:2,
-                checked: false,
+                done: false,
                 title: 'Resolve other tasks'
             }
         ]
     },
     {
         id: 2,
-        level: 1,
         title: 'Home Stuff',
         categories: [
             {id: 1, title: 'Vacuum cleaner'},
@@ -35,7 +34,6 @@ const categories = [
     },
     {
         id: 3,
-        level: 1,
         title: 'Children',
         categories: [
             {id: 1, title: 'Take 1 from kindergarten',
@@ -52,17 +50,17 @@ const categories = [
         tasks: [
             {
                 id: 1,
-                checked: false,
+                done: true,
                 title: 'Clean the car'
             },
             {
                 id:2,
-                checked: false,
+                done: false,
                 title: 'Take a vacationday'
             },
             {
                 id:3,
-                checked: false,
+                done: true,
                 title: 'Call the teacher'
             }
         ]
@@ -73,15 +71,10 @@ class Home extends React.Component {
     render() {
         return (
             <div className="homepage">
-                <div className="filters">
-                    <input type="checkbox" />
-                    <label>Show done</label>
-                    <div className="search">
-                        <input type="text" placeholder="Search"/>
-                        <button className="remove-btn">X</button>
-                    </div>
-                </div>
+                <Filters />
+
                 <progress className="progress-bar" value="46" max="100"></progress>
+
                 <div className="input-add-fields">
                     <div className="add-category">
                         <input type="text" placeholder="Enter Category title"/>
@@ -92,6 +85,7 @@ class Home extends React.Component {
                         <button>Add</button>
                     </div>
                 </div>
+
                 <div className="tasks">
                     <div className="categories-list">
                         <CategoryList categories={categories} />
