@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router';
-import CategoryList from '../../presentational/categoryList/CaterogyList.jsx';
-import TasksList from  '../../presentational/tasksList/TasksList.jsx';
-import Filters from '../../presentational/filters/Filters.jsx'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import CategoryList from '../../components/presentational/categoryList/CaterogyList.jsx';
+import TasksList from  '../../components/presentational/tasksList/TasksList.jsx';
+import Filters from '../../components/presentational/filters/Filters.jsx';
+import { addCategoryAction, addCategory } from '../../actions/app';
 
 const categories = [
     {
@@ -67,18 +69,52 @@ const categories = [
     }
 ];
 
+@connect(state => ({
+    categoriesCount: state.app.get('categoriesCount'),
+    categories: state.app.get('categories')
+}))
+
 class Home extends React.Component {
+    static propTypes = {
+        categoriesCount: PropTypes.number,
+        categories: PropTypes.array,
+        dispatch: PropTypes.func,
+    }
+
+    constructor() {
+        super();
+		this.state = {
+			categoryName: ''
+		};
+        this.addCategory = this.addCategory.bind(this);
+		this.changeCategoryName = this.changeCategoryName.bind(this);
+    }
+
+    addCategory() {
+        const { dispatch } = this.props;
+        dispatch(addCategory(this.state.categoryName));
+    }
+
+	changeCategoryName(evt){
+		this.setState({
+			categoryName: evt.target.value
+		});
+	}
     render() {
+        const { categoriesCount, categories } = this.props;
+
         return (
             <div className="homepage">
                 <Filters />
-
                 <progress className="progress-bar" value="46" max="100"></progress>
 
                 <div className="input-add-fields">
                     <div className="add-category">
-                        <input type="text" placeholder="Enter Category title"/>
-                        <button>Add</button>
+                        <input type="text" value={this.state.categoryName} onChange={(evn) => this.changeCategoryName(evn)} placeholder="Enter Category title"/>
+                        <button onClick={ this.addCategory }>
+                            Add
+                        </button>
+                        Categories Total Count: {categoriesCount}
                     </div>
                     <div className="add-smth">
                         <input type="text" placeholder="Input With btn" />

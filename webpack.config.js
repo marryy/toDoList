@@ -10,11 +10,11 @@ const autoprefixer = require('autoprefixer');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
 
-const jsSourcePath = path.join(__dirname, './source/js');
+const jsSourcePath = path.join(__dirname, './src/js');
 const buildPath = path.join(__dirname, './build');
-const imgPath = path.join(__dirname, './source/assets/img');
-const iconPath = path.join(__dirname, './source/assets/icons');
-const sourcePath = path.join(__dirname, './source');
+const imgPath = path.join(__dirname, './src/assets/img');
+const iconPath = path.join(__dirname, './src/assets/icons');
+const sourcePath = path.join(__dirname, './src');
 
 
 // Common plugins
@@ -131,7 +131,7 @@ if (isProduction) {
       exclude: /node_modules/,
       use: [
         'style-loader',
-        // Using source maps breaks urls in the CSS loader
+        // Using src maps breaks urls in the CSS loader
         // https://github.com/webpack/css-loader/issues/232
         // This comment solves it, but breaks testing from a local network
         // https://github.com/webpack/css-loader/issues/232#issuecomment-240449998

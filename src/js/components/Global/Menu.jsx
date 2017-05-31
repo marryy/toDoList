@@ -8,18 +8,12 @@ export default class Menu extends Component {
     return (
       <div className='Menu'>
         <div className='Menu-links'>
-          <IndexLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            to={ routes.DASHBOARD }
-          >
+          <IndexLink activeClassName='Menu-link--active'
+            className='Menu-link' to={ routes.DASHBOARD }>
             Home
           </IndexLink>
-          <Link
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            to={ routes.ABOUT }
-          >
+          <Link activeClassName='Menu-link--active'
+            className='Menu-link' to={ routes.ABOUT }>
             About
           </Link>
         </div>

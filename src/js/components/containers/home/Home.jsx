@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import CategoryList from '../../components/presentational/categoryList/CaterogyList.jsx';
-import TasksList from  '../../components/presentational/tasksList/TasksList.jsx';
-import Filters from '../../components/presentational/filters/Filters.jsx'
-
+import React from 'react';
+import { Link } from 'react-router';
+import CategoryList from '../../presentational/categoryList/CaterogyList.jsx';
+import TasksList from  '../../presentational/tasksList/TasksList.jsx';
+import Filters from '../../presentational/filters/Filters.jsx';
+import { testAction, testAsync } from '../../../actions/app';
 
 const categories = [
     {
@@ -66,7 +67,23 @@ const categories = [
         ]
     }
 ];
-export default class About extends Component {
+
+@connect(state => ({
+    categoriesCount: state.app.get('categoriesCount')
+}))
+
+class Home extends React.Component {
+    static propTypes = {
+        categoriesCount: PropTypes.number,
+        dispatch: PropTypes.func,
+    }
+
+    handleTestButtonClick() {
+        const { dispatch } = this.props;
+
+        dispatch(testAction());
+    }
+
     render() {
         return (
             <div className="homepage">
@@ -77,7 +94,9 @@ export default class About extends Component {
                 <div className="input-add-fields">
                     <div className="add-category">
                         <input type="text" placeholder="Enter Category title"/>
-                        <button>Add</button>
+                        <button onClick={ this.handleTestButtonClick }>
+                            AddDOO
+                        </button>
                     </div>
                     <div className="add-smth">
                         <input type="text" placeholder="Input With btn" />
@@ -107,4 +126,4 @@ export default class About extends Component {
     }
 }
 
-
+export default Home;
