@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import CategoryList from '../../components/presentational/categoryList/CaterogyList.jsx';
 import TasksList from  '../../components/presentational/tasksList/TasksList.jsx';
 import Filters from '../../components/presentational/filters/Filters.jsx';
-import { addCategoryAction, addCategory } from '../../actions/app';
+import { addCategoryAction, addCategory, undo, redo } from '../../actions/app';
+import { ActionCreators } from 'redux-undo';
 
 const categories = [
     {
@@ -70,8 +71,7 @@ const categories = [
 ];
 
 @connect(state => ({
-    categoriesCount: state.app.get('categoriesCount'),
-    categories: state.app.get('categories')
+    categories: state.app.present.categories || []
 }))
 
 class Home extends React.Component {
@@ -86,11 +86,14 @@ class Home extends React.Component {
 		this.state = {
 			categoryName: ''
 		};
+
         this.addCategory = this.addCategory.bind(this);
 		this.changeCategoryName = this.changeCategoryName.bind(this);
+        this.undo = this.undo.bind(this);
+        this.redo = this.redo.bind(this);
     }
 
-    addCategory() {
+     addCategory() {
         const { dispatch } = this.props;
         dispatch(addCategory(this.state.categoryName));
     }
@@ -100,11 +103,27 @@ class Home extends React.Component {
 			categoryName: evt.target.value
 		});
 	}
+
+    redo() {
+        const { dispatch } = this.props;
+        dispatch(redo())
+    }
+    undo() {
+        const { dispatch } = this.props;
+        dispatch(undo())
+    }
+
     render() {
-        const { categoriesCount, categories } = this.props;
+        //to use mock data:
+        // const { categoriesCount } = this.props;
+       const { categoriesCount, categories } = this.props;
 
         return (
             <div className="homepage">
+                <div>
+                    <button onClick={ this.undo }>Undo</button>
+                    <button onClick={ this.redo }>Redo</button>
+                </div>
                 <Filters />
                 <progress className="progress-bar" value="46" max="100"></progress>
 

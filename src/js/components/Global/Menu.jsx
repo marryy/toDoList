@@ -16,6 +16,7 @@ export default class Menu extends Component {
             className='Menu-link' to={ routes.ABOUT }>
             About
           </Link>
+
         </div>
       </div>
     );

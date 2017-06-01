@@ -19,12 +19,15 @@ const actionsMap = {
     });
   },
   [ADD_CATEGORY]: (state, action) => {
-	  var categories = state.get( 'categories' );
-	  categories.push( {id: categories.length, title: action.data} );
+  	console.log("STATE", state);
+	  let cats = state.categories || [];
+	  cats[cats.length] = {id: cats.length, title: action.data};
 
-	  return (state.merge( [
-		  categories,
-	  ]))
+	  // return (state.merge( [
+		//   categories,
+	  // ]))
+	console.log(state.categories);
+	  return Object.assign({}, state, {categories:cats});
   }
 };
 

@@ -93,12 +93,14 @@ class Home extends React.Component {
                     <div className="tasks-list">
                         <div className="tasks">
                             {
-                                categories.map(category => {
-                                    const tasks = category.tasks || [];
-                                    return (
-                                        <TasksList key={category.id} tasks={tasks}/>
-                                    );
-                                })
+                                categories ?
+                                    (
+                                    categories.map(category => {
+                                        const tasks = category.tasks || [];
+                                        return (
+                                            <TasksList key={category.id} tasks={tasks}/>
+                                        );
+                                    })) : ''
                             }
                         </div>
                     </div>

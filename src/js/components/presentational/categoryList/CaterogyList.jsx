@@ -9,12 +9,13 @@ class CategoryList extends React.Component {
 		return (
 			<div className="categories">
 				{
-					categories.map(category => {
+					categories ?
+						(categories.map(category => {
 						const categories = category.categories || [];
 						return (
 							<Category key={category.id} level={category.level || level} title={category.title} categories={categories}/>
 						);
-					})
+					})) : ''
 				}
 			</div>
 		);

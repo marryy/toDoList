@@ -2,7 +2,7 @@ import React from 'react';
 
 class Task extends React.Component {
 	handleClick() {
-		console.log("BUUU");
+		console.log("checked");
 	}
 
 	render() {

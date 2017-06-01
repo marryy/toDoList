@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
 import app from 'reducers/app';
-import {undoHistoryReducer} from 'redux-undo-redo';
+import undoable from 'redux-undo';
 
 export default combineReducers({
-  app,
-  undoHistory: undoHistoryReducer
+
+  app: undoable(app, {
+    limit: 20,
+    undoType: 'UNDO',
+    redoType: 'REDO'
+  })
 });
